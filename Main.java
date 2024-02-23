@@ -142,6 +142,65 @@ class DoublyLinkedList1 {
             current = current.next;
         }
     }
+    public void deleteByParcelId(String parcelId) {
+        Node current = head;
+
+        // Traverse the list to find the node with the specified Parcel ID
+        while (current != null) {
+            if (current.parcel.parcelId.equals(parcelId)) {
+                if (current == head) {
+                    head = current.next;
+                    if (head != null)
+                        head.prev = null;
+                } else {
+                    current.prev.next = current.next;
+                    if (current.next != null)
+                        current.next.prev = current.prev;
+                }
+                System.out.println("");
+                System.out.println("Parcel with ID " + parcelId + " deleted.");
+
+               break; // Exit loop once the parcel is found and deleted
+            }
+            current = current.next;
+        }
+
+        // If the parcel ID is not found, display a message
+        System.out.println("");
+        System.out.println("Parcel with ID " + parcelId + " not found.");
+
+    }
+
+    public void searchByParcelId(String parcelId) {
+        Node current = head;
+        boolean found = false;
+
+        while (current != null) {
+            if (current.parcel.parcelId.equals(parcelId)) {
+                found = true;
+                System.out.println("-------------");
+                System.out.println("Parcel ID: " + current.parcel.parcelId);
+                System.out.println("Sender's name: " + current.parcel.sender_name);
+                System.out.println("Recipient's name: " + current.parcel.recipient_name);
+                System.out.println("Weight: Kg." + current.parcel.weight);
+                System.out.println("Price: Rs."+ current.parcel.price);
+                System.out.println("Courier ID: " + current.courier.courier_id);
+                System.out.println("Distance: " + current.courier.distance);
+                System.out.println("Location: " + current.courier.location);
+                System.out.println("Priority: " + current.courier.priority);
+                System.out.println("Delivery Fee: " + current.courier.deliveryfee);
+                System.out.println("-------------");
+                break; // Exit the loop once the parcel with the given ID is found
+            }
+            current = current.next;
+        }
+
+        if (!found) {
+            System.out.println("-------------");
+            System.out.println("Parcel with ID " + parcelId + " not found.");
+            System.out.println("-------------");
+        }
+    }
 }
 
 
